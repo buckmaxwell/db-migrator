@@ -9,6 +9,7 @@ scur = slconn.cursor()
 
 print "BEGINNING MIGRATION"
 
+'''
 #parts
 scur.execute('SELECT number, title FROM parts')
 for row in scur.fetchall():
@@ -17,9 +18,10 @@ for row in scur.fetchall():
 	pgconn.commit()
 
 print "SUCCESSFULLY INSERTED PARTS"
+'''
 
 #subarts
-scur.execute('SELECT letter, part_number, title FROM subarts')
+scur.execute('SELECT letter, part_number, title FROM subparts')
 for row in scur.fetchall():
 	pcur.execute('INSERT INTO dbv_subparts (letter, part_number, title, update_number, active) VALUES (%s, %s, %s, %s, %s)',
 		(row[0], row[1], row[2], 1, True))
