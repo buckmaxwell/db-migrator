@@ -9,8 +9,8 @@ scur = slconn.cursor()
 
 
 #parts
-pcur.execute('SELECT * FROM parts')
-for row in pcur.fetchall():
+scur.execute('SELECT * FROM parts')
+for row in scur.fetchall():
 	print row
 #subarts
 #standards
