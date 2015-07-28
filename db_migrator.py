@@ -55,7 +55,7 @@ def add_missing_violation(violation_number):
 	standard_number = violation_number.split('(')[0]
 	pcur.execute('INSERT INTO dbv_violations (number, description, standard_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
 	(violation_number, violation_number, standard_number, 1, True))
-	try
+	try:
 		pgconn.commit()
 		return True
 	except:
@@ -84,7 +84,7 @@ def add_missing_violation2(violation2_number):
 	violation_number = violation2_number.split('(')[0]
 	pcur.execute('INSERT INTO dbv_violation_2s (number, description, violation_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
 	(violation2_number, violation2_number, violation_number, 1, True))
-	try
+	try:
 		pgconn.commit()
 		return True
 	except:
@@ -115,7 +115,7 @@ def add_missing_violation3(violation3_number):
 	violation2_number = violation3_number.split('(')[0]
 	pcur.execute('INSERT INTO dbv_violation_3s (number, description, violation2_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
 	(violation3_number, violation3_number, violation2_number, 1, True))
-	try
+	try:
 		pgconn.commit()
 		return True
 	except:
