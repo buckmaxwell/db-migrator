@@ -83,7 +83,7 @@ for row in scur.fetchall():
 print "SUCCESSFULLY INSERTED VIOLATIONS2"
 
 def add_missing_violation2(violation2_number):
-	violation_number = violation2_number.rsplit('(',1)[0]
+	violation_number = violation2_number.rsplit('(',1)[0].lstrip('.')
 	try:
 		pcur.execute('INSERT INTO dbv_violation_2s (number, description, violation_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
 		(violation2_number, violation2_number, violation_number, 1, True))
@@ -116,7 +116,7 @@ print "SUCCESSFULLY INSERTED VIOLATIONS3"
 
 
 def add_missing_violation3(violation3_number):
-	violation2_number = violation3_number.rsplit('(',1)[0]
+	violation2_number = violation3_number.rsplit('(',1)[0].lstrip('.')
 	try:
 		pcur.execute('INSERT INTO dbv_violation_3s (number, description, violation2_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
 		(violation3_number, violation3_number, violation2_number, 1, True))
