@@ -113,7 +113,7 @@ print "SUCCESSFULLY INSERTED VIOLATIONS3"
 
 def add_missing_violation3(violation3_number):
 	violation2_number = violation3_number.split('(')[0]
-		try:
+	try:
 		pcur.execute('INSERT INTO dbv_violation_3s (number, description, violation2_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
 		(violation3_number, violation3_number, violation2_number, 1, True))
 		pgconn.commit()
