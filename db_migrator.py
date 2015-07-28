@@ -59,6 +59,7 @@ def add_missing_violation(violation_number):
 		pgconn.commit()
 		return True
 	except:
+		pgconn.rollback()
 		return False
 	
 
@@ -88,6 +89,7 @@ def add_missing_violation2(violation2_number):
 		pgconn.commit()
 		return True
 	except:
+		pgconn.rollback()
 		return False
 
 
@@ -119,6 +121,7 @@ def add_missing_violation3(violation3_number):
 		pgconn.commit()
 		return True
 	except:
+		pgconn.rollback()
 		return False
 
 #violations4
