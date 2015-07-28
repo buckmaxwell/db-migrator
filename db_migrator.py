@@ -59,6 +59,7 @@ for row in scur.fetchall():
 	except Exception as e:
 		pgconn.rollback()
 		print "ERROR1: " + str(e)
+		print type(e)
 
 print "SUCCESSFULLY INSERTED VIOLATIONS2"
 
@@ -73,6 +74,7 @@ for row in scur.fetchall():
 	except Exception as e:
 		pgconn.rollback()
 		print "ERROR2: " + str(e)
+		print type(e)
 
 print "SUCCESSFULLY INSERTED VIOLATIONS3"
 
