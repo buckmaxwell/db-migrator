@@ -9,7 +9,7 @@ scur = slconn.cursor()
 
 print "BEGINNING MIGRATION"
 
-'''
+
 #parts
 scur.execute('SELECT number, title FROM parts')
 for row in scur.fetchall():
@@ -39,7 +39,6 @@ for row in scur.fetchall():
 
 print "SUCCESSFULLY INSERTED STANDARDS"
 
-'''
 
 #violations
 scur.execute('SELECT number,description,standard_number FROM violations')
@@ -53,12 +52,14 @@ print "SUCCESSFULLY INSERTED VIOLATIONS"
 
 def add_missing_violation(violation_number):
 	standard_number = violation_number.split('(')[0]
+	failure = True
 	try:
 		pcur.execute('INSERT INTO dbv_violations (number, description, standard_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
 		(violation_number, violation_number, standard_number, 1, True))
 		pgconn.commit()
 		return True
-	except:
+	except Exception as e:
+		print e
 		pgconn.rollback()
 		return False
 	
