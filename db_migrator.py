@@ -84,15 +84,17 @@ print "SUCCESSFULLY INSERTED VIOLATIONS2"
 
 def add_missing_violation2(violation2_number):
 	violation_number = violation2_number.rsplit('(',1)[0].lstrip('.')
-	try:
-		pcur.execute('INSERT INTO dbv_violation_2s (number, description, violation_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
-		(violation2_number, violation2_number, violation_number, 1, True))
-		pgconn.commit()
-		return True
-	except Exception as e:
-		print e
-		pgconn.rollback()
-		return False
+	failure = True
+	while failure:
+		try:
+			pcur.execute('INSERT INTO dbv_violation_2s (number, description, violation_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
+			(violation2_number, violation2_number, violation_number, 1, True))
+			pgconn.commit()
+			return True
+		except psycopg2.IntegrityError as e:
+			pgconn.rollback()
+			if not add_missing_violation(violation_number):
+				return False
 
 
 #violations3
@@ -117,15 +119,16 @@ print "SUCCESSFULLY INSERTED VIOLATIONS3"
 
 def add_missing_violation3(violation3_number):
 	violation2_number = violation3_number.rsplit('(',1)[0].lstrip('.')
-	try:
-		pcur.execute('INSERT INTO dbv_violation_3s (number, description, violation2_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
-		(violation3_number, violation3_number, violation2_number, 1, True))
-		pgconn.commit()
-		return True
-	except Exception as e:
-		print e
-		pgconn.rollback()
-		return False
+	while True:
+		try:
+			pcur.execute('INSERT INTO dbv_violation_3s (number, description, violation2_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
+			(violation3_number, violation3_number, violation2_number, 1, True))
+			pgconn.commit()
+			return True
+		except psycopg2.IntegrityError as e:
+			pgconn.rollback()
+			if not add_missing_violation2(violation2_number):
+				return False
 
 #violations4
 scur.execute('SELECT number,description,violations_level_3_number FROM violations_level_4')
