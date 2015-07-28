@@ -57,7 +57,7 @@ for row in scur.fetchall():
 			(row[0], row[1], row[2], 1, True))
 		pgconn.commit()
 	except Exception as e:
-		print "ERROR1: " + (e)
+		print "ERROR1: " + str(e)
 
 print "SUCCESSFULLY INSERTED VIOLATIONS2"
 
@@ -70,7 +70,7 @@ for row in scur.fetchall():
 			(row[0], row[1], row[2], 1, True))
 		pgconn.commit()
 	except Exception as e:
-		print "ERROR2: " + (e)
+		print "ERROR2: " + str(e)
 
 print "SUCCESSFULLY INSERTED VIOLATIONS3"
 
