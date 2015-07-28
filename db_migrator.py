@@ -56,7 +56,7 @@ for row in scur.fetchall():
 		pcur.execute('INSERT INTO dbv_violation_2s (number, description, violation_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
 			(row[0], row[1], row[2], 1, True))
 		pgconn.commit()
-	except Exception as e:
+	except psycopg2.IntegrityError as e:
 		pgconn.rollback()
 		print "ERROR1: " + str(e)
 		print type(e)
@@ -71,7 +71,7 @@ for row in scur.fetchall():
 		pcur.execute('INSERT INTO dbv_violation_3s (number, description, violation2_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
 			(row[0], row[1], row[2], 1, True))
 		pgconn.commit()
-	except Exception as e:
+	except psycopg2.IntegrityError as e:
 		pgconn.rollback()
 		print "ERROR2: " + str(e)
 		print type(e)
