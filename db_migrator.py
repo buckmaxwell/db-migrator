@@ -51,7 +51,7 @@ print "SUCCESSFULLY INSERTED VIOLATIONS"
 
 
 def add_missing_violation(violation_number):
-	standard_number = violation_number.split('(')[0]
+	standard_number = violation_number.split('(')[0].lstrip('.')
 	failure = True
 	try:
 		pcur.execute('INSERT INTO dbv_violations (number, description, standard_number, update_number, active) VALUES (%s, %s, %s, %s, %s)',
@@ -89,7 +89,8 @@ def add_missing_violation2(violation2_number):
 		(violation2_number, violation2_number, violation_number, 1, True))
 		pgconn.commit()
 		return True
-	except:
+	except Exception as e:
+		print e
 		pgconn.rollback()
 		return False
 
@@ -121,7 +122,8 @@ def add_missing_violation3(violation3_number):
 		(violation3_number, violation3_number, violation2_number, 1, True))
 		pgconn.commit()
 		return True
-	except:
+	except Exception as e:
+		print e
 		pgconn.rollback()
 		return False
 
